@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-# 🔥 LangChain
+# LangChain
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 from langchain.vectorstores import Chroma
@@ -113,7 +113,7 @@ PARIS_PRODUCTS = load_csv("womens_collections.csv")
 
 
 # =====================================================
-# LANGCHAIN SETUP (🔥 NEW)
+# LANGCHAIN SETUP (NEW)
 # =====================================================
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -196,7 +196,7 @@ Amount: {order.get('TotalAmount', order.get('TotalAmountEUR'))}
                 }
 
     # =================================================
-    # 🤖 LANGCHAIN FALLBACK (🔥 CORE UPGRADE)
+    # 🤖 LANGCHAIN FALLBACK (CORE UPGRADE)
     # =================================================
 
     try:
