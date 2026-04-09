@@ -1,24 +1,17 @@
-from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import TextLoader
+from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
 
-# Load PDF
-loader = PyPDFLoader("data/your_docs.pdf")
+# Load file
+loader = TextLoader("data/sample.txt")
 documents = loader.load()
 
-# Split text
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=50
-)
-docs = text_splitter.split_documents(documents)
-
 # Create embeddings
-embeddings = OpenAIEmbeddings()
+embedding = OpenAIEmbeddings()
 
-# Store in FAISS
-db = FAISS.from_documents(docs, embeddings)
-db.save_local("faiss_index")
+# Store in vector DB
+db = Chroma.from_documents(documents, embedding, persist_directory="db")
 
-print("✅ RAG Index created!")
+db.persist()
+
+print("✅ Data ingested successfully")
